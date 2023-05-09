@@ -1,0 +1,44 @@
+<div>
+   <div class="pa-table">
+       <div class="mat-elevation-z8">
+         <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+ 
+           <!-- Vaccine id Column -->
+           <ng-container matColumnDef="vaccineTypeId">
+             <th mat-header-cell *matHeaderCellDef> Vaccine type id </th>
+             <td mat-cell *matCellDef="let element">{{element.vaccineTypeId}}</td>
+           </ng-container>
+ 
+           <!-- Vaccine name Column -->
+           <ng-container matColumnDef="vaccineTypeName">
+             <th mat-header-cell *matHeaderCellDef> Vaccine type name </th>
+             <td mat-cell *matCellDef="let element"> {{element.vaccineTypeName}} </td>
+           </ng-container>
+ 
+           <!-- Number of injection Column -->
+           <ng-container matColumnDef="quantity">
+             <th mat-header-cell *matHeaderCellDef> Quantity </th>
+             <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+           </ng-container>
+
+           <!-- Origin Column -->
+           <ng-container matColumnDef="origin">
+            <th mat-header-cell *matHeaderCellDef> Origin </th>
+            <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+          </ng-container>
+
+           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+           <tr mat-row *matRowDef="let row; columns: displayedColumns;"> (click)="selection.toggle(row)"</tr>
+         </table>
+ 
+         <mat-card *ngIf="noResults$ | async">
+           <h4>No data found!</h4>
+         </mat-card>
+ 
+         <mat-paginator #pagging [pageSizeOptions]="[5,10]">
+         </mat-paginator>
+       </div>
+       <br>
+   </div>
+ </div>
+ 

@@ -1,0 +1,14 @@
+.list-tbl {
+  background-color: white;
+  box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+
+}
+.ct-list-news{
+   padding: 20px;
+}
+.ckbox{
+   text-align: center;
+}
+.btn-action{
+   margin: 0 10px 0 0;
+}

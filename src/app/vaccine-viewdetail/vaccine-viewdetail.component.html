@@ -1,0 +1,100 @@
+<div>
+  <h3 class="text-center">VACCINE DETAIL</h3>
+  <div>
+    <form [formGroup] = "vaccineForm">
+      <mat-card>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>vaccine ID <span class="text-danger">(*)</span></mat-label>
+              <input matInput formControlName="vaccineID">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <div>
+              <label>Avtice <span class="text-danger">(*)</span></label>
+            </div>
+            <i class="material-icons" >format_color_fill</i>
+            <mat-checkbox style="margin-left: 20px;" color="primary"  formControlName="active"></mat-checkbox>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Vaccine Name <span class="text-danger">(*)</span></mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Vaccine Type <span class="text-danger">(*)</span></mat-label>
+                <input matInput formControlName="vaccineTypeName" />
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Number of inject </mat-label>
+              <input matInput formControlName="numberOfInjection">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Usage</mat-label>
+              <textarea matInput rows="4" formControlName="usage"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Indication</mat-label>
+              <textarea matInput rows="4" formControlName="indication"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Contraindication</mat-label>
+              <textarea matInput rows="4" formControlName="contraindication"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Time of beggining next injection</mat-label>
+              <input matInput [matDatepicker]="picker1" name="nextTimeStart" #startDateRef formControlName="nextTimeStart">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Time of ending next injection</mat-label>
+              <input matInput [matDatepicker]="picker2" name="nextTimeEnd" formControlName="nextTimeEnd">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100" appearance = "outline">
+              <mat-label>Origin</mat-label>
+              <input matInput formControlName="origin">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <button *ngIf="getActive" mat-raised-button color="primary" type="button" class="mr-2"
+             [mat-dialog-close]="data">Update</button>
+             <button mat-raised-button color="accent" type="button" class="mr-2"
+             (click)="onCancelClick()">Cancel</button>
+        </div>
+
+      </mat-card>
+    </form>
+  </div>
+</div>

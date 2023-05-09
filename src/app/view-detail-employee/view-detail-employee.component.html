@@ -1,0 +1,119 @@
+<div>
+   <div>
+      <h4 class="text-center">VIEW DETAIL</h4>
+   </div>
+   <form [formGroup]="EmployeeForm">
+      <mat-card>
+         <div class="row my-2">
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Employee Id <span class="text-danger">(*)</span></mat-label>
+                  <mat-icon class="align-middle" matPrefix>account_box</mat-icon>
+                  <input matInput type="text" formControlName="employeeId">
+               </mat-form-field>
+            </div>
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Employee name <span class="text-danger">(*)</span></mat-label>
+                  <mat-icon class="align-middle" matPrefix>account_box</mat-icon>
+                  <input matInput name="employeeName" formControlName="employeeName">
+               </mat-form-field>
+            </div>
+            <div class="col">
+               <div class="h-100">
+                  <div class="pt-4">
+                     <span class="align-middle">
+                        <i class="material-icons">face</i>
+                     </span>
+                     <input type="radio" name="gender" id="male" class="with-gap" formControlName="gender" [value]="0">
+                     <label for="male">Male</label>
+                     <input type="radio" name="gender" id="female" class="with-gap" formControlName="gender"
+                        [value]="1">
+                     <label for="female" class="m-l-20">Female</label>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row my-2">
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Date of birth <span class="text-danger">(*)</span></mat-label>
+                  <mat-icon class="align-middle" matPrefix>date_range</mat-icon>
+                  <input matInput [matDatepicker]="picker" name="dateOfBirth" formControlName="dateOfBirth">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+               </mat-form-field>
+            </div>
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Phone <span class="text-danger">(*)</span></mat-label>
+                  <mat-icon class="align-middle" matPrefix>call</mat-icon>
+                  <input type="text" matInput formControlName="phone">
+               </mat-form-field>
+            </div>
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Address <span class="text-danger">(*)</span></mat-label>
+                  <mat-icon class="align-middle" matPrefix>location_on</mat-icon>
+                  <input type="text" matInput name="addess" formControlName="address">
+               </mat-form-field>
+            </div>
+         </div>
+         <div class="row my-2">
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Email <span class="text-danger">(*)</span></mat-label>
+                  <mat-icon class="align-middle" matPrefix>email</mat-icon>
+                  <input type="text" matInput formControlName="email">
+               </mat-form-field>
+            </div>
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Working place</mat-label>
+                  <mat-icon class="align-middle" matPrefix>home</mat-icon>
+                  <input type="tel" matInput formControlName="workingPlace">
+               </mat-form-field>
+            </div>
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Position</mat-label>
+                  <mat-icon class="align-middle" matPrefix>policy</mat-icon>
+                  <input type="text" matInput formControlName="position">
+               </mat-form-field>
+            </div>
+         </div>
+         <div class="row my-2">
+            <div class="col">
+               <img alt="" class="w-25" [src]="EmployeeForm.value.image">
+            </div>
+         </div>
+      </mat-card>
+      <mat-card class="mt-3">
+         <div>
+            <div class="row">
+               <div class="col">
+                  <mat-form-field class="w-100">
+                     <mat-label>Username<span class="text-danger">(*)</span></mat-label>
+                     <mat-icon class="align-middle" matPrefix>account_circle</mat-icon>
+                     <input type="text" matInput formControlName="username">
+                  </mat-form-field>
+               </div>
+               <div class="col">
+                  <mat-form-field class="w-100">
+                     <mat-label>Password<span class="text-danger">(*)</span></mat-label>
+                     <mat-icon class="align-middle" matPrefix>vpn_key</mat-icon>
+                     <input type="password" matInput formControlName="password" autocomplete="on">
+                  </mat-form-field>
+               </div>
+            </div>
+         </div>
+
+         <div>
+            <button mat-raised-button color="primary" type="button" class="mr-2"
+               [mat-dialog-close]="data">Update</button>
+            <button mat-raised-button color="accent" type="button" class="mr-2"
+               (click)="onCancelClick()">Cancel</button>
+         </div>
+      </mat-card>
+   </form>
+</div>

@@ -1,0 +1,13 @@
+.w-100{
+   width: 100%;
+}
+.p-4{
+   padding: 0 30px;
+}
+.pa-table{
+   padding: 2%;
+   background-color: white;
+}
+.btn-action{
+   margin: 0 10px 0 0;
+}

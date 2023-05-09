@@ -1,0 +1,42 @@
+<div>
+    <form [formGroup]="NewsForm">
+       <mat-card>
+         <div class="row my-2">
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Post Date <span class="text-danger"></span></mat-label>
+                  <input matInput type="text" formControlName="postDate">
+               </mat-form-field>
+            </div>        
+         </div>
+         <div class="row my-2">
+            <div class="col">
+               <mat-form-field class="w-100">
+                  <mat-label>Preview <span class="text-danger"></span></mat-label>
+                  <input matInput type="text" formControlName="preview">
+               </mat-form-field>
+            </div>        
+         </div>
+          <div class="row my-2">
+             <div class="col">
+                <mat-form-field class="w-100">
+                   <mat-label>Title <span class="text-danger"></span></mat-label>
+                   <input matInput type="text" formControlName="title">
+                </mat-form-field>
+             </div>        
+          </div>
+          <div class="row my-2">
+            <div class="col">            
+               <mat-label>Content<span class="text-danger"></span></mat-label>
+               <ckeditor [config]="ckeConfig" matInput name="content" formControlName="content"></ckeditor>
+           </div>     
+         </div>
+          <div>
+             <button mat-raised-button color="primary" type="button" class="mr-2"
+                [mat-dialog-close]="data">Update</button>
+             <button mat-raised-button color="accent" type="button" class="mr-2"
+                (click)="onCancelClick()">Cancel</button>
+          </div>
+       </mat-card>
+    </form>
+ </div>

@@ -1,0 +1,60 @@
+<div>
+	<h3 class="text-center">REPORT VACCINE</h3>
+	<div>
+		<mat-card>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2">
+						<div>
+							<label>Display Type: </label>
+						</div>
+						<div>
+							<mat-radio-group aria-label="Select an option" [(ngModel)]="report.type">
+								<mat-radio-button [value]="'report'">Report</mat-radio-button>
+								<mat-radio-button [value]="'chart'">Chart</mat-radio-button>
+							</mat-radio-group>
+						</div>
+					</div>
+					<div class="float-right" *ngIf="report.type=='report'">
+						<div>
+							<label>Origin:</label>
+						</div>
+						<div>
+							<mat-form-field class="example-form-field">
+								<input matInput type="text" (keyup)="applyFilter($event)">
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="col-md-2" *ngIf="report.type=='chart'">
+						<div>
+							<label>Select Year:</label>
+						</div>
+						<div>
+							<mat-form-field>
+								<mat-select [value]="''">
+									<mat-option [value]="''">-- Select year</mat-option>
+									<mat-option [value]="'option1'">Option 1</mat-option>
+									<mat-option [value]="'option2'">Option 2</mat-option>
+									<mat-option [value]="'option3'">Option 3</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+			</div>
+		</mat-card>
+	</div>
+	<div>
+
+		<div [ngSwitch]="report.type">
+			<div *ngSwitchCase="'report'">
+				<app-report-vaccine-table></app-report-vaccine-table>
+			</div>
+			<div *ngSwitchCase="'chart'">
+				<app-report-vaccine-chart></app-report-vaccine-chart>
+
+			</div>
+		</div>
+
+	</div>
+</div>

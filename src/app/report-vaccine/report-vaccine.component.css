@@ -1,0 +1,12 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.date_pick {
+  width: 100px;
+}
+
+.slt-vac {
+   width: 100%;
+   height: 30px;
+   padding: 0px;
+}

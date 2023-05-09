@@ -1,0 +1,60 @@
+<div>
+    <h2 class="text-center">VIEW DETAIL VACCINE TYPE</h2>
+    <div>
+        <mat-card>
+
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <label>Vaccine Type Code <span class="text-danger">(*)</span></label>
+                        <mat-form-field class="w-100" appearance="outline">
+
+                            <mat-icon class="align-middle" matPrefix>edit</mat-icon>
+                            <input matInput disabled disabled [value]="data?.id">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <label>Vaccine Type Name <span class="text-danger">(*)</span></label>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-icon class="align-middle" matPrefix>edit</mat-icon>
+                            <input matInput disabled [value]="data?.vaccineTypeName">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>Active <span class="text-danger">(*)</span></label>
+                        </div>
+                        <i class="material-icons">format_color_fill</i>
+                        <mat-checkbox #ck style="margin-left: 20px;" color="primary" disabled [checked]="data?.status">
+                        </mat-checkbox>
+                        <img alt="" class="w-25 ml-5" [src]="data?.image">
+                    </div>
+                    
+                       
+                 
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Description</label>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-icon class="align-top" matPrefix>edit</mat-icon>
+                            <textarea matInput [rows]="8" disabled [value]="data?.description"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+               
+                <div class="mt-5">
+                    <div class="mt-5">
+                        <button mat-raised-button color="primary" type="button" class="mr-2"
+                            (click)="goToUpdateVaccineType(data?.id) " *ngIf="data?.status==true">Update</button>
+                        <button mat-raised-button color="primary" type="button" class="mr-2"
+                            (click)="onCancelClick()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card>
+
+    </div>
+
+</div>

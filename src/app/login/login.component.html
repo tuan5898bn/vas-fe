@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-md-4 col-md-offset-4">
+			<div class="account-wall">
+				<div class="pb-2">
+					<mat-progress-bar *ngIf="isLoginLoading" class="example-margin" [color]="cfLoad.color"
+						[mode]="cfLoad.mode" [value]="cfLoad.value" [bufferValue]="cfLoad.bufferValue">
+					</mat-progress-bar>
+				</div>
+				<img class="profile-img"
+					src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+					alt="">
+
+				<div>
+					<h2 class="text-center">Member Login</h2>
+				</div>
+				<div class="text-center text-danger" *ngIf="messLogin">
+					<h5>{{messLogin}}</h5>
+				</div>
+				<form class="form-signin" (ngSubmit)="onLogin()" [formGroup]="loginForm">
+					<div>
+						<mat-form-field class="example-full-width">
+							<mat-label>username</mat-label>
+							<input matInput placeholder="input username" [formControl]="loginForm.get('username')">
+							<mat-error>{{userNameErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+
+					<div>
+						<mat-form-field class="example-full-width">
+							<mat-label>Password</mat-label>
+							<input matInput placeholder="input password" type="password"
+								[formControl]="loginForm.get('password')">
+							<mat-error>{{passwordErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="example-full-width">
+						<button mat-raised-button color="primary" class="example-full-width">Login</button>
+					</div>
+				</form>
+				<div>
+					<div class="text-center forgot-pass bg-success">
+						<a href="#">Forgot Password?</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

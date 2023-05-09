@@ -1,0 +1,29 @@
+<div>
+    <h3 class="text-center">IMPORT VACCINE</h3>
+    <div>
+        <mat-card>
+            <div *ngIf="errStatus">
+              <h4 class="text-center text-danger">
+                  {{errStatus}}
+              </h4>
+          </div>
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <label class="image-upload-container btn btn-bwm">
+                            <span>Select File</span>
+                            <input type="file"  (change)="processExcelFile($event)">
+                        </label>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <button mat-raised-button color="primary" type="button" class="mr-2" (click)="importFile()">Import</button>
+                    <button mat-raised-button color="primary" type="reset" class="mr-2">Reset</button>
+                    <button mat-raised-button color="primary" type="button" class="mr-2" (click)="getPreviousPage()">Cancel</button>
+                </div>
+            </form>
+        </mat-card>
+
+    </div>
+
+</div>

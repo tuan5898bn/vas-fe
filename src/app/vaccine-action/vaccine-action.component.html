@@ -1,0 +1,132 @@
+<div>
+	<h3 class="text-center">{{action}}</h3>
+	<div>
+		<mat-card>
+			<div *ngIf="errStatus">
+				<h4 class="text-center text-danger">
+					{{errStatus}}
+				</h4>
+			</div>
+			<div *ngIf="vaccineForm.hasError('fromToDate')">
+				<h4 class="text-center text-danger">
+					Time to start next vaccination must be less than end time
+				</h4>
+			</div>
+			<form [formGroup]="vaccineForm" (ngSubmit)="onSubmit()">
+				<div class="row">
+					<div class="col-sm-8">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>vaccine ID <span class="text-danger">(*)</span></mat-label>
+							<input matInput formControlName="vaccineID">
+							<mat-error>{{vaccineIdErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col-sm-4">
+						<div>
+							<label>Avtice <span class="text-danger">(*)</span></label>
+						</div>
+						<i class="material-icons">format_color_fill</i>
+						<mat-checkbox style="margin-left: 20px;" color="primary" formControlName="active">
+						</mat-checkbox>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Vaccine Name <span class="text-danger">(*)</span></mat-label>
+							<input matInput formControlName="name">
+							<mat-error>{{vaccineNameErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Vaccine Type <span class="text-danger">(*)</span></mat-label>
+							<mat-select formControlName="vaccineTypeId">
+
+								<mat-option *ngFor="let vaccineType of vaccineTypes" [value]="vaccineType.id">
+									{{vaccineType.vaccineTypeName}}</mat-option>
+							</mat-select>
+							<mat-error>{{vaccineTypeErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Number of inject </mat-label>
+							<input matInput formControlName="numberOfInjection">
+							<mat-error>{{numberOfInjectErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Usage</mat-label>
+							<textarea matInput rows="4" formControlName="usage"></textarea>
+							<mat-error>{{usageErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Indication</mat-label>
+							<textarea matInput rows="4" formControlName="indication"></textarea>
+							<mat-error>{{indicationErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Contraindication</mat-label>
+							<textarea matInput rows="4" formControlName="contraindication"></textarea>
+							<mat-error>{{contraindicationErrorMess}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Time of beggining next injection</mat-label>
+							<input matInput [matDatepicker]="picker1" name="nextTimeStart" #startDateRef
+								formControlName="nextTimeStart">
+							<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+							<mat-datepicker #picker1></mat-datepicker>
+						</mat-form-field>
+					</div>
+					<div class="col">
+						<mat-form-field class="w-100" appearance="outline">
+							<mat-label>Time of ending next injection</mat-label>
+							<input matInput [matDatepicker]="picker2" name="nextTimeEnd" formControlName="nextTimeEnd"
+								[min]="startDateRef.value">
+							<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+							<mat-datepicker #picker2></mat-datepicker>
+						</mat-form-field>
+					</div>
+					<div class="col">
+				
+						<mat-form-field class="w-100" [appearance]="'outline'">
+							<mat-label>Origin</mat-label>
+							<input type="text"
+									 matInput
+									 formControlName="origin"
+									 [matAutocomplete]="auto">
+							<mat-error>{{originErrorMess}}</mat-error>
+							<mat-autocomplete #auto="matAutocomplete">
+							  <mat-option *ngFor="let country of filteredCountries| async" [value]="country">
+								 {{country}}
+							  </mat-option>
+							</mat-autocomplete>
+						 </mat-form-field>
+					</div>
+				</div>
+				<div>
+					<button mat-raised-button type="submit" class="mr-2 btn btn-success">Save</button>
+					<button mat-raised-button type="button" class="mr-2 btn btn-info"
+						(click)="onClearForm()">Reset</button>
+					<button mat-raised-button type="button" class="mr-2 btn btn-warning"
+						(click)="getPreviousPage()">Cancel</button>
+				</div>
+			</form>
+
+		</mat-card>
+	</div>
+</div>

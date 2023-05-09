@@ -1,0 +1,88 @@
+<div>
+    <h3 class="text-center">VACCINE TYPE LIST</h3>
+    <div class="pa-table">
+        <div class="mat-elevation-z8">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="w-50">
+                            show:
+                            <mat-form-field class="w-25">
+                                <mat-select [(ngModel)]="itemPerPage" (ngModelChange)="selectEntries()">
+                                    <mat-option [value]="10"> 10</mat-option>
+                                    <mat-option [value]="25"> 25</mat-option>
+                                    <mat-option [value]="50"> 50</mat-option>
+                                    <mat-option [value]="100"> 100</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            entries
+                        </div>
+                    </div>
+                    <div class="col ">
+                        <mat-button-toggle-group>
+                            <mat-button-toggle (click)="getAll()">All</mat-button-toggle>
+                            <mat-button-toggle (click)="getAllByStatus(true)" [checked]="true">Active
+                            </mat-button-toggle>
+                            <mat-button-toggle (click)="getAllByStatus(false)">In-Active</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="float-right">
+							<mat-label>Search</mat-label>
+							<input matInput (keyup)="applyFilter($event)">
+						</mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> Code </th>
+                    <td mat-cell *matCellDef="let element"> <a [routerLink]="[]"
+                            (click)="viewDetail(element)">{{element.id}}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="VaccineTypeName">
+                    <th mat-header-cell *matHeaderCellDef> Vaccine Type Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.vaccineTypeName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Discription">
+                    <th mat-header-cell *matHeaderCellDef> Description </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status == 0?'In-Active':'Active'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Image">
+                    <th mat-header-cell *matHeaderCellDef> Image </th>
+                    <td mat-cell *matCellDef="let element"> <img [src]="element.image" width="50px" alt=""></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+                </tr>
+            </table>
+            <mat-paginator [pageSize]="itemPerPage" [hidePageSize]="true">
+            </mat-paginator>
+        </div>
+        <div class="my-3">
+            <button mat-raised-button color="primary" class="btn-action" (click)="getCreateVaccineTypePage()">New
+                Vaccine Type</button>
+            <button mat-raised-button color="warn" class="btn-action" (click)="makeInActive()">Make In-Active</button>
+        </div>
+    </div>
+</div>

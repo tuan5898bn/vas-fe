@@ -1,0 +1,98 @@
+<div>
+    <h3 class="text-center">EMPLOYEE LIST</h3>
+    <div class="pa-table p-3">
+        <div class="mat-elevation-z8">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md ">
+                        <div class="w-50">
+                            show:
+                            <mat-form-field class="w-25">
+                                <mat-select [(ngModel)]="itemPerPage" (ngModelChange)="selectEntries()">
+                                    <mat-option [value]="10"> 10</mat-option>
+                                    <mat-option [value]="25"> 25</mat-option>
+                                    <mat-option [value]="50"> 50</mat-option>
+                                    <mat-option [value]="100"> 100</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            entries
+                        </div>
+                    </div>
+                    <div class="col-md ">
+                        <div class="float-right">
+                            <div>Search:
+                                <mat-form-field>
+                                    <input matInput (keyup)="applyFilter($event)" #input>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Employee Id </th>
+                    <td mat-cell *matCellDef="let element">
+                        <a [routerLink]="[]"
+                            (click)="openModalViewDetail(element.employeeId)">{{element.employeeId}}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Date of Birth">
+                    <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date:'dd/MM/yyyy'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Gender">
+                    <th mat-header-cell *matHeaderCellDef> Gender </th>
+                    <td mat-cell *matCellDef="let element"> {{element.gender == 0?'Male':'Female'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Phone">
+                    <th mat-header-cell *matHeaderCellDef> Phone </th>
+                    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Address">
+                    <th mat-header-cell *matHeaderCellDef> Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Image">
+                    <th mat-header-cell *matHeaderCellDef> Image </th>
+                    <td mat-cell *matCellDef="let element"> <img [src]="element.image" width="50px" alt=""></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+                </tr>
+            </table>
+            <mat-paginator #pagging [pageSize]="itemPerPage" [hidePageSize]="true" [showFirstLastButtons]="true" >
+            </mat-paginator>
+        </div>
+        <div class="my-3">
+            <button mat-raised-button color="primary" class="btn-action" (click)="getCreateEmployeePage()">New
+                Employee</button>
+            <button mat-raised-button color="accent" class="btn-action" (click)="getUpdatePage()">Update
+                Employee</button>
+            <button mat-raised-button color="warn" class="btn-action" (click)="openConfirmDelete()">Delete
+                Employee</button>
+        </div>
+    </div>
+    
+</div>

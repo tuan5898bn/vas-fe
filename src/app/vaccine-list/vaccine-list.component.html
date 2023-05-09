@@ -1,0 +1,119 @@
+<div>
+	<h3 class="text-center">VACCINE LIST</h3>
+	<div class="pa-table">
+		<div class="mat-elevation-z8">
+			<div *ngIf="successStatus == 'update-success'">
+				<h4 class="text-center text-success">Update success</h4>
+			</div>
+			<div *ngIf="successStatus == 'insert-success'">
+				<h4 class="text-center text-success">Insert success</h4>
+			</div>
+			<div *ngIf="successStatus == 'import-success'">
+				<h4 class="text-center text-success">Import success</h4>
+			</div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col">
+						<div class="w-50">
+							show:
+							<mat-form-field class="w-25">
+								<mat-select [(ngModel)]="itemPerPage" (ngModelChange)="selectEntries()">
+									<mat-option [value]="10"> 10</mat-option>
+									<mat-option [value]="15"> 15</mat-option>
+									<mat-option [value]="20"> 20</mat-option>
+								</mat-select>
+							</mat-form-field>
+							entries
+						</div>
+					</div>
+					<div class=" col">
+						<mat-button-toggle-group appearance="standard">
+							<mat-button-toggle (click)="getAll()">All</mat-button-toggle>
+							<mat-button-toggle (click)="getAllByStatus(true)" [checked]="true">Active</mat-button-toggle>
+							<mat-button-toggle (click)="getAllByStatus(false)">In-Active</mat-button-toggle>
+						</mat-button-toggle-group>
+					</div>
+					<div class="col">
+						<mat-form-field class="float-right">
+							<mat-label>Search</mat-label>
+							<input matInput (keyup)="applyFilter($event)">
+						</mat-form-field>
+					</div>
+				</div>
+
+			</div>
+
+
+			<table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+				<!-- Checkbok Column -->
+				<ng-container matColumnDef="select">
+					<th mat-header-cell *matHeaderCellDef>
+						<mat-checkbox (change)="$event ? masterToggle() : null"
+							[checked]="selection.hasValue() && isAllSelected()"
+							[indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+						</mat-checkbox>
+					</th>
+					<td mat-cell *matCellDef="let row">
+						<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+							[checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+						</mat-checkbox>
+					</td>
+				</ng-container>
+				<!-- Vaccine id Column -->
+				<ng-container matColumnDef="vaccineId">
+					<th mat-header-cell *matHeaderCellDef> Vaccine id </th>
+					<td mat-cell *matCellDef="let element">
+						<a [routerLink]="" (click)="viewVaccineDetail(element.vaccineID)">{{element.vaccineID}}</a>
+					</td>
+				</ng-container>
+
+				<!-- Vaccine name Column -->
+				<ng-container matColumnDef="vaccineName">
+					<th mat-header-cell *matHeaderCellDef> Vaccine name </th>
+					<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+				</ng-container>
+
+				<!-- Vaccine type Column -->
+				<ng-container matColumnDef="vaccineType">
+					<th mat-header-cell *matHeaderCellDef> Vaccine type </th>
+					<td mat-cell *matCellDef="let element"> {{element.vaccineTypeName}} </td>
+				</ng-container>
+
+				<!-- Number of injection Column -->
+				<ng-container matColumnDef="numberOfInjection">
+					<th mat-header-cell *matHeaderCellDef> Number of injection </th>
+					<td mat-cell *matCellDef="let element"> {{element.numberOfInjection}} </td>
+				</ng-container>
+
+				<!-- Origin Column -->
+				<ng-container matColumnDef="origin">
+					<th mat-header-cell *matHeaderCellDef> Origin </th>
+					<td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+				</ng-container>
+
+				<!-- Status Column -->
+				<ng-container matColumnDef="status">
+					<th mat-header-cell *matHeaderCellDef> Status </th>
+					<td mat-cell *matCellDef="let element"> {{element.active == true ? 'Active' : 'In-Active'}} </td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+				</tr>
+			</table>
+			<mat-card *ngIf="noResults$ | async">
+				<h4>No data found!</h4>
+			</mat-card>
+			<mat-paginator #pagging [pageSize]="itemPerPage" [hidePageSize]="true" [showFirstLastButtons]="true">
+			</mat-paginator>
+		</div>
+		<br>
+		<div class="">
+			<button mat-raised-button class="btn btn-success btn-action" (click)="moveToVaccinePage()">New
+				Vaccine</button>
+			<button mat-raised-button class="btn btn-warning btn-action" (click)="moveToUpdateVaccinePage()">Update
+				Vaccine</button>
+			<button mat-raised-button class="btn btn-danger btn-action" (click)="makeInactive()">Make In-Active</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,43 @@
+<div>
+    <div>
+        <h3 class="text-center">{{action}}</h3>
+    </div>
+    <div>
+  
+      <mat-card class="example-card">
+        <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Title <span class="text-danger">(*)</span></mat-label>
+                  <input matInput name="title" formControlName="title">
+                  <mat-error>{{titleNewsError}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Preview<span class="text-danger">(*)</span></mat-label>
+                  <textarea matInput name="preview" formControlName="preview"></textarea>
+                  <mat-error>{{previewNewsError}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                
+                <mat-label>Content<span class="text-danger">(*)</span></mat-label>
+                <ckeditor matInput name="content" formControlName="content"></ckeditor>
+              
+            </div>
+              <div class="col-12 mt-2">
+                <div>
+                  <button mat-raised-button color="primary" type="submit" class="mr-2">Save</button>
+                  <button mat-raised-button color="accent" type="button" (click)="resetForm()" class="mr-2">Reset</button>
+                  <button mat-raised-button color="warn" type="button" (click)="goToShowNews()" class="mr-2">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>

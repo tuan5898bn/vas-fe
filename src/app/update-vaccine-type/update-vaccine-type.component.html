@@ -1,0 +1,78 @@
+<div>
+    <h2 class="text-center">UPDATE VACCINE TYPE</h2>
+    <div>
+        <mat-card>
+            <div *ngIf="errRes">
+                <h4 class="text-center text-danger">
+                    {{errRes}}
+                </h4>
+            </div>
+            <form [formGroup]="updateVaccineTypeForm" (ngSubmit)="updateVaccineType()">
+                <div class="row">
+                    <div class="col">
+                        <label>Vaccine Type Code <span class="text-danger">(*)</span></label>
+                        <mat-form-field class="w-100" appearance="outline">
+                           
+                            <mat-icon class="align-middle" matPrefix>edit</mat-icon>
+                            <input matInput formControlName="id">
+                            <mat-error>{{vaccineTypeIdErrorMess}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <label>Vaccine Type Name <span class="text-danger">(*)</span></label>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-icon class="align-middle" matPrefix>edit</mat-icon>
+                            <input matInput formControlName="vaccineTypeName">
+                            <mat-error>{{vaccineTypeNameErrorMess}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>Active <span class="text-danger">(*)</span></label>
+                        </div>
+                        <i class="material-icons">format_color_fill</i>
+                        <mat-checkbox style="margin-left: 20px;" color="primary" 
+                            formControlName="status" >
+                        </mat-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Description</label>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-icon class="align-top" matPrefix>edit</mat-icon>
+                            <textarea matInput formControlName="description" [rows]="8"></textarea>
+                            <mat-error>{{vaccineTypeDescriptionErrorMess}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="image-upload-container btn btn-bwm">
+                            <span>Select Image</span>
+                            <input #imageInput type="file" accept="image/*" (change)="processFile($event)">
+                        </label>
+                    </div>
+                    <div class="col" *ngIf="isPending">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <div class="col" *ngIf="successResponse">
+                        <img [src]="successResponse.link" alt="" class="w-50">
+                    </div>
+                    <div class="col" *ngIf="!successResponse">
+                        <img [src]="updateVaccineTypeForm.value?.image" alt="" class="w-25">
+                     </div>
+                </div>
+                <div class="mt-5">
+                    <button mat-raised-button color="primary" type="submit" class="mr-2">Update</button>
+                    <button mat-raised-button color="primary" type="button" (click)="onClearForm()"
+                        class="mr-2">Reset</button>
+                    <button mat-raised-button color="primary" type="button" (click)="goToShowVaccineType()"
+                        class="mr-2">Cancel</button>
+                </div>
+            </form>
+        </mat-card>
+
+    </div>
+
+</div>
